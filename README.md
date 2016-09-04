@@ -1,9 +1,9 @@
-### Traveller Guide
+# Traveller Guide
 
 This is a route finding app developed using ExpressJS, AngularJS, and MySQL.
 
-## Requirements
+### Requirements
 
-## Installation
+### Installation
 
-## Running
+### Running
