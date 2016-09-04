@@ -7,4 +7,4 @@ nbproject
 .idea
 .node_history
 
-config/secret/**/*
+config/secrets/**/*
