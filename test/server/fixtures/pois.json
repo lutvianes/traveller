@@ -1,0 +1,18 @@
+[
+    {
+        "model": "Poi",
+        "data": {
+            "name": "Foo",
+            "latitude": 44.968046,
+            "longitude": -94.420307
+        }
+    },
+    {
+        "model": "Poi",
+        "data": {
+            "name": "Bar",
+            "latitude": 44.968046,
+            "longitude": -94.420307
+        }
+    }
+]
