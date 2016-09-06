@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { Poi } from '../../models/index';
 import { PoiService } from '../../services/index';
@@ -12,12 +12,16 @@ export class PoiFormComponent {
     active = true;
     model = new Poi();
 
+    @Output()
+    onAddPoi = new EventEmitter<Poi>();
+
     constructor(private poiService: PoiService) {}
 
     add(): void {
         this.poiService.create(this.model)
-            .then(() => {
+            .then(poi => {
                 alert("success");
+                this.onAddPoi.emit(poi);
                 this.refresh();
             });
     }

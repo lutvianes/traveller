@@ -18,6 +18,16 @@ export class PoiService {
             .catch(this.handleError);
     }
 
+    getPois(): Promise<Poi[]> {
+        return this.http
+            .get(this.poiUrl)
+            .toPromise()
+            .then(response => {
+                return response.json() as Poi[];
+            })
+            .catch(this.handleError);
+    }
+
     handleError(error: any): Promise<any> {
         console.error(error);
         return Promise.reject(error.message || error);

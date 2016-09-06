@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 
 import { routing } from './app.routing';
 
-import { AppComponent, PoiFormComponent } from './components/index';
+import { AppComponent, PoiFormComponent, PoisComponent } from './components/index';
 import { PoiService  } from './services/index';
 
 @NgModule({
@@ -19,7 +19,8 @@ import { PoiService  } from './services/index';
     ],
     declarations:   [
         AppComponent,
-        PoiFormComponent
+        PoiFormComponent,
+        PoisComponent
     ],
     providers:      [
         PoiService

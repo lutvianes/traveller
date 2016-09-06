@@ -3,4 +3,5 @@
     <a href="#">Delete</a>
     <a href="#">Find routes</a>
 </nav>
-<poi-form></poi-form>
+<poi-form (onAddPoi)="pois.add($event)"></poi-form>
+<pois #pois></pois>
