@@ -34,7 +34,7 @@ router.route('/:id')
 
         controller.remove(req.params.id)
             .then(function(result) {
-                if (result[0]) // if number of affected rows not 0
+                if (result) // if number of affected rows not 0
                     return res.status(204).send();
                 else
                     return next();

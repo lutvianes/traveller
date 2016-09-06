@@ -28,6 +28,15 @@ export class PoiService {
             .catch(this.handleError);
     }
 
+    delete(id: number): Promise<Poi> {
+        const url = `${this.poiUrl}/${id}`;
+        return this.http
+            .delete(url, {headers: this.headers})
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
+
     handleError(error: any): Promise<any> {
         console.error(error);
         return Promise.reject(error.message || error);

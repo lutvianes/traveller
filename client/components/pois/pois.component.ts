@@ -10,6 +10,7 @@ import { PoiService } from '../../services/index';
             <ul>
                 <li *ngFor="let poi of pois">
                     {{poi.name}}
+                    <button (click)="delete(poi)">del</button>
                 </li>
             </ul>
         </div>
@@ -28,5 +29,12 @@ export class PoisComponent implements OnInit {
 
     add(poi: Poi): void {
         this.pois.push(poi);
+    }
+
+    delete(poi: Poi): void {
+        this.poiService.delete(poi.id)
+            .then(() => {
+                this.pois = this.pois.filter(p => p !== poi);
+            })
     }
 }
