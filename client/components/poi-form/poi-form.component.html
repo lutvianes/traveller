@@ -1,0 +1,19 @@
+<form *ngIf="active" (ngSubmit)="add()" #poiForm="ngForm">
+    <input
+        [(ngModel)]="model.name"
+        name="name"
+        placeholder="name"
+        required
+        />
+    <input [(ngModel)]="model.latitude"
+        placeholder="latitude"
+        name="latitude"
+        required
+        />
+    <input [(ngModel)]="model.longitude"
+        placeholder="longitude"
+        name="longitude"
+        required
+        />
+    <button type="submit" [disabled]="!poiForm.form.valid">Add</button>
+</form>
