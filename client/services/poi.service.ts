@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
-import { Poi } from '../models/index';
+import { Poi } from '../models';
 
 @Injectable()
 export class PoiService {
@@ -14,7 +14,7 @@ export class PoiService {
         return this.http
             .post(this.poiUrl, JSON.stringify(poi), {headers: this.headers})
             .toPromise()
-            .then(() => poi)
+            .then(response => response.json())
             .catch(this.handleError);
     }
 

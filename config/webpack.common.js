@@ -12,7 +12,7 @@ module.exports = {
 
     resolve: {
 		modulesDirectories: ['node_modules'],
-        extensions: ['', '.js', '.ts']
+        extensions: ['', '.js', '.json', '.ts']
     },
 
     module: {
@@ -26,17 +26,21 @@ module.exports = {
                 loader: 'html'
             },
             {
+                test: /\.json$/,
+                loader: 'json'
+            },
+            {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
                 loader: 'file?name=assets/[name].[hash].[ext]'
             },
             {
                 test: /\.css$/,
-                exclude: path.join(__dirname, "client", "components"),
+                exclude: path.join(__dirname, "../client", "components"),
                 loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
             },
             {
                 test: /\.css$/,
-                include: path.join(__dirname, "client", "components"),
+                include: path.join(__dirname, "../client", "components"),
                 loader: 'raw'
             }
         ]
@@ -48,9 +52,6 @@ module.exports = {
         }),
         new ExtractTextPlugin("[name].css", {
             allChunks: true
-        }),
-        // new HtmlWebpackPlugin({
-        //     template: '!!pug!client/views/index.pug'
-        // })
+        })
     ]
 };

@@ -13,20 +13,24 @@ export class PoiFormComponent {
     model = new Poi();
 
     @Output()
-    onAddPoi = new EventEmitter<Poi>();
+    onCreated = new EventEmitter<Poi>();
 
     constructor(private poiService: PoiService) {}
 
     add(): void {
         this.poiService.create(this.model)
             .then(poi => {
-                alert("success");
-                this.onAddPoi.emit(poi);
-                this.refresh();
+                this.onCreated.emit(poi);
+                this.reset();
             });
     }
 
-    refresh(): void {
+    setPosition(latitude: number, longitude: number): void {
+        this.model.latitude = latitude;
+        this.model.longitude = longitude;
+    }
+
+    reset(): void {
         this.model = new Poi();
         this.active = false;
         setTimeout(() => this.active = true, 0);

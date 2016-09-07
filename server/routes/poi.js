@@ -19,8 +19,7 @@ router.route('/')
         controller.add(req.body)
             .then(function(result) {
                 return res.status(201)
-                    .location('http://'+req.hostname+req.baseUrl+'/'+result.id)
-                    .send();
+                    .json(result);
             }).catch(function(err) {
                 return next(err);
             });

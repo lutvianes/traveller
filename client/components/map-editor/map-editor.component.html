@@ -1,0 +1,25 @@
+<poi-form #poiForm (onCreated)="pois.add($event)"></poi-form>
+<pois #pois
+    (onAdded)="onPoiAdded($event)"
+    (onDeleted)="onPoiDeleted($event)"
+    (onSelected)="onPoiSelected($event)">
+</pois>
+<div class="map-container">
+    <div class="center-marker"></div>
+    <sebm-google-map
+        [latitude]="center.lat"
+        [longitude]="center.lng"
+        [streetViewControl]="false"
+        (centerChange)="poiForm.setPosition($event.lat, $event.lng)">
+        <sebm-google-map-marker *ngFor="let m of markers"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [draggable]="m.draggable"
+            [visible]="m.visible">
+        </sebm-google-map-marker>
+        <sebm-google-map-polyline>
+            <sebm-google-map-polyline-point [latitude]="-6.418247889839607" [longitude]="107.428536685625"></sebm-google-map-polyline-point>
+            <sebm-google-map-polyline-point [latitude]="-6.811122124980193" [longitude]="107.2417691075"></sebm-google-map-polyline-point>
+        </sebm-google-map-polyline>
+    </sebm-google-map>
+</div>
