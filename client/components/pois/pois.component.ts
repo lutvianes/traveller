@@ -1,35 +1,47 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
 
-import { Poi } from '../../models/index';
-import { PoiService } from '../../services/index';
+import {Poi} from '../../models/index';
+import {PoiService, PoiUiService} from '../../services';
 
 @Component({
     selector: 'pois',
     templateUrl: './pois.component.html'
 })
 
-export class PoisComponent implements OnInit {
+export class PoisComponent implements OnInit, OnDestroy {
 
     pois: Poi[] = [];
     selectedPoi: Poi;
 
     @Output()
-    onAdded = new EventEmitter<Poi>();
-    @Output()
-    onDeleted = new EventEmitter<Poi>();
-    @Output()
     onSelected = new EventEmitter<Poi>();
 
-    constructor(private poiService: PoiService) {}
+    private subscriptions: Subscription[] = [];
 
-    ngOnInit(): void {
-        this.poiService.getPois()
-            .then(pois => pois.forEach(poi => this.add(poi)));
+    constructor(
+        private poiService: PoiService,
+        private poiUiService: PoiUiService
+    ) {
+        this.subscriptions.push(
+            this.poiUiService.poiAdded$.subscribe(
+                poi => this.pois.push(poi)
+            ));
+
+        this.subscriptions.push(
+            this.poiUiService.poiDeleted$.subscribe(
+                poi => this.pois = this.pois.filter(
+                    p => p !== poi
+                )
+            ));
     }
 
-    add(poi: Poi): void {
-        this.pois.push(poi);
-        this.onAdded.emit(poi);
+    ngOnInit() {
+        this.poiService.getAll().then(pois => this.pois = pois);
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach(s => s.unsubscribe());
     }
 
     select(poi: Poi): void {
@@ -39,9 +51,6 @@ export class PoisComponent implements OnInit {
 
     delete(poi: Poi): void {
         this.poiService.delete(poi.id)
-            .then(() => {
-                this.pois = this.pois.filter(p => p !== poi);
-                this.onDeleted.emit(poi);
-            })
+            .then(() => this.poiUiService.delete(poi));
     }
 }

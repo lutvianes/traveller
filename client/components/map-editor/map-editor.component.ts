@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 
-import { Poi } from '../../models/index';
-import { Marker } from '../../interfaces/index';
+import {MapComponent} from '../map/map.component';
+import {Marker} from '../../interfaces';
+import {Poi} from '../../models';
+import {PoiService, PoiUiService} from '../../services';
 
 @Component({
     selector: 'map-editor',
@@ -10,32 +12,37 @@ import { Marker } from '../../interfaces/index';
 })
 
 export class MapEditorComponent {
+
     markers: Marker[] = [];
     selected: Marker;
-    center = {
-        lat: -6.9147444,
-        lng: 107.6098111
-    };
+    center = {lat: -6.9147444, lng: 107.6098111};
 
-    selectMarker(targetMarker: Marker) {
+    @ViewChild(MapComponent)
+    private mapComponent: MapComponent;
+
+    constructor(
+        private poiService: PoiService,
+        private poiUiService: PoiUiService
+    ) {}
+
+    displayResult(result) {
+        this.mapComponent.displayDirections(result);
+    }
+
+    selectMarker(id: number) {
         this.markers.forEach(marker => {
                 marker.visible = false;
-                if (marker.id === targetMarker.id) {
+                if (marker.id === id) {
                     marker.visible = true;
+                    console.log(marker);
                     this.selected = marker;
+                    this.center = {
+                        lat: marker.lat,
+                        lng: marker.lng
+                    };
                 }
                 return marker;
             });
-        this.center = this.selected;
-    }
-
-    findDirecitons(start, end) {
-        let request = {
-            origin: start,
-            destination: end,
-            travelMode: 'DRIVING'
-        }
-        
     }
 
     onPoiAdded(poi: Poi) {
@@ -45,7 +52,7 @@ export class MapEditorComponent {
             lng: poi.longitude
         };
         this.markers.push(marker);
-        this.selectMarker(marker);
+        this.selectMarker(poi.id);
     }
 
     onPoiDeleted(poi: Poi) {
@@ -55,10 +62,6 @@ export class MapEditorComponent {
     }
 
     onPoiSelected(poi: Poi) {
-        this.selectMarker({
-            id: poi.id,
-            lat: poi.latitude,
-            lng: poi.longitude
-        });
+        this.selectMarker(poi.id);
     }
 }

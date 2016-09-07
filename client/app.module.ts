@@ -1,15 +1,16 @@
 import './extensions/rxjs-extensions';
 
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { AgmCoreModule } from 'angular2-google-maps/core';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {AgmCoreModule} from 'angular2-google-maps/core';
+import {GoogleMapsAPIWrapper} from 'angular2-google-maps/core/services/google-maps-api-wrapper';
 
-import { routing } from './app.routing';
+// import {routing} from './app.routing';
 
-import { AppComponent, PoiFormComponent, PoisComponent, MapEditorComponent } from './components';
-import { PoiService } from './services';
+import {AppComponent, PoiFormComponent, PoisComponent, MapEditorComponent, MapComponent, FindRouteFormComponent} from './components';
+import {PoiService, PoiUiService, DirectionsService} from './services';
 
 var secret = require('../config/secrets');
 
@@ -27,10 +28,15 @@ var secret = require('../config/secrets');
         AppComponent,
         PoiFormComponent,
         PoisComponent,
-        MapEditorComponent
+        MapEditorComponent,
+        MapComponent,
+        FindRouteFormComponent
     ],
     providers:      [
-        PoiService
+        PoiService,
+        PoiUiService,
+        DirectionsService,
+        GoogleMapsAPIWrapper
     ],
     bootstrap:      [ AppComponent ]
 })

@@ -5,15 +5,17 @@
         placeholder="name"
         required
         />
-    <input [(ngModel)]="model.latitude"
+    <input [ngModel]="model.latitude"
         placeholder="latitude"
         name="latitude"
         required
+        readonly
         />
-    <input [(ngModel)]="model.longitude"
+    <input [ngModel]="model.longitude"
         placeholder="longitude"
         name="longitude"
         required
+        readonly
         />
     <button type="submit" [disabled]="!poiForm.form.valid">Add</button>
 </form>

@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
 
-import { Poi } from '../models';
+import {Poi} from '../models';
 
 @Injectable()
 export class PoiService {
+
     private poiUrl = "api/pois";
     private headers = new Headers({'Content-type': 'application/json'});
 
@@ -18,7 +19,7 @@ export class PoiService {
             .catch(this.handleError);
     }
 
-    getPois(): Promise<Poi[]> {
+    getAll(): Promise<Poi[]> {
         return this.http
             .get(this.poiUrl)
             .toPromise()
