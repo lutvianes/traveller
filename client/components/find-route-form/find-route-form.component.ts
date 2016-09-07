@@ -5,16 +5,8 @@ import {DirectionsService, PoiUiService, PoiService} from '../../services';
 import {Poi} from '../../models';
 
 @Component({
-	selector: 'find-route-form',
-	template: `
-		<select [ngModel]="origin" (ngModelChange)="onChangeOrigin($event)" name="origin">
-    <option *ngFor="let poi of pois" [ngValue]="poi">{{poi.name}}</option>
-</select>
-<select [ngModel]="destination" (ngModelChange)="onChangeDestination($event)" name="destination">
-    <option *ngFor="let poi of pois" [ngValue]="poi">{{poi.name}}</option>
-</select>
-<button (click)="findRoutes()">Find</button>
-	`
+    selector: 'find-route-form',
+    templateUrl: './find-route-form.component.html'
 })
 
 export class FindRouteFormComponent implements OnInit, OnDestroy {

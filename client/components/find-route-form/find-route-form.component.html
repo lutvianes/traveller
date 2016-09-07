@@ -1,0 +1,7 @@
+<select [ngModel]="origin" (ngModelChange)="onChangeOrigin($event)" name="origin">
+    <option *ngFor="let poi of pois" [ngValue]="poi">{{poi.name}}</option>
+</select>
+<select [ngModel]="destination" (ngModelChange)="onChangeDestination($event)" name="destination">
+    <option *ngFor="let poi of pois" [ngValue]="poi">{{poi.name}}</option>
+</select>
+<button (click)="findRoutes()">Find</button>
