@@ -15,7 +15,7 @@ export class PoiService {
         return this.http
             .post(this.poiUrl, JSON.stringify(poi), {headers: this.headers})
             .toPromise()
-            .then(response => response.json())
+            .then(response => this.toPoi(response.json()))
             .catch(this.handleError);
     }
 
@@ -23,9 +23,7 @@ export class PoiService {
         return this.http
             .get(this.poiUrl)
             .toPromise()
-            .then(response => {
-                return response.json() as Poi[];
-            })
+            .then(response => response.json() as Poi[])
             .catch(this.handleError);
     }
 
@@ -41,5 +39,14 @@ export class PoiService {
     handleError(error: any): Promise<any> {
         console.error(error);
         return Promise.reject(error.message || error);
+    }
+
+    toPoi(obj: any): Poi {
+        return {
+            id: obj.id,
+            name: obj.name,
+            latitude: obj.latitude,
+            longitude: obj.longitude
+        };
     }
 }

@@ -10,7 +10,7 @@ import {PoiService, PoiUiService} from '../../services';
 
 export class PoiFormComponent {
     active = true;
-    model = new Poi();
+    model: Poi = new Poi();
 
     constructor(
         private poiService: PoiService,

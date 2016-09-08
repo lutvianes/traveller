@@ -1,7 +1,23 @@
-<select [ngModel]="origin" (ngModelChange)="onChangeOrigin($event)" name="origin">
-    <option *ngFor="let poi of pois" [ngValue]="poi">{{poi.name}}</option>
-</select>
-<select [ngModel]="destination" (ngModelChange)="onChangeDestination($event)" name="destination">
-    <option *ngFor="let poi of pois" [ngValue]="poi">{{poi.name}}</option>
-</select>
-<button (click)="findRoutes()">Find</button>
+<div class="row">
+	<div class="input-field col s6">
+		<select
+			class="browser-default"
+			name="origin"
+			[ngModel]="origin"
+			(ngModelChange)="onChangeOrigin($event)">
+		    <option *ngFor="let poi of pois" [ngValue]="poi">{{poi.name}}</option>
+		</select>
+		<label class="active">Origin</label>
+	</div>
+	<div class="input-field col s6">
+		<select
+			class="browser-default"
+			name="destination"
+			[ngModel]="destination"
+			(ngModelChange)="onChangeDestination($event)">
+		    <option *ngFor="let poi of pois" [ngValue]="poi">{{poi.name}}</option>
+		</select>
+		<label class="active">Destination</label>
+	</div>
+</div>
+<button class="waves-effect waves-light btn" (click)="findRoutes()">Find</button>

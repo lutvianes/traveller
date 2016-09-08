@@ -6,11 +6,10 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {AgmCoreModule} from 'angular2-google-maps/core';
 import {GoogleMapsAPIWrapper} from 'angular2-google-maps/core/services/google-maps-api-wrapper';
-
 // import {routing} from './app.routing';
 
 import {AppComponent, PoiFormComponent, PoisComponent, MapEditorComponent, MapComponent, FindRouteFormComponent} from './components';
-import {PoiService, PoiUiService, DirectionsService} from './services';
+import {PoiService, DirectionsService} from './services';
 
 var secret = require('../config/secrets');
 
@@ -34,7 +33,6 @@ var secret = require('../config/secrets');
     ],
     providers:      [
         PoiService,
-        PoiUiService,
         DirectionsService,
         GoogleMapsAPIWrapper
     ],

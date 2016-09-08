@@ -1,8 +1,17 @@
 <div>
-    <ul>
-        <li *ngFor="let poi of pois" (click)="select(poi)">
-            {{poi.name}}
-            <button (click)="delete(poi); $event.stopPropagation()">del</button>
-        </li>
-    </ul>
+    <div class="collection">
+        <a *ngFor="let poi of pois" (click)="select(poi)"
+        	[class.active]="selectedPoi == poi"
+        	href="#!"
+        	class="collection-item">
+        	<div>
+        		{{poi.name}}
+        		<a (click)="delete(poi)"
+        			href="#!"
+        			class="secondary-content">
+        			<i class="material-icons">delete</i>
+        		</a>
+        	</div>
+        </a>
+    </div>
 </div>

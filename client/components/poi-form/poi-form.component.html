@@ -1,21 +1,41 @@
-<form *ngIf="active" (ngSubmit)="add()" #poiForm="ngForm">
-    <input
-        [(ngModel)]="model.name"
-        name="name"
-        placeholder="name"
-        required
-        />
-    <input [ngModel]="model.latitude"
-        placeholder="latitude"
-        name="latitude"
-        required
-        readonly
-        />
-    <input [ngModel]="model.longitude"
-        placeholder="longitude"
-        name="longitude"
-        required
-        readonly
-        />
-    <button type="submit" [disabled]="!poiForm.form.valid">Add</button>
-</form>
+<div class="row">
+    <form *ngIf="active" (ngSubmit)="add()" #poiForm="ngForm"
+        class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <input
+                    [(ngModel)]="model.name"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    required
+                    />
+                <label for="name" class="active">Name</label>
+            </div>
+        </div>
+        <small>Click on map to add location</small>
+        <div class="row">
+            <div class="input-field col s6">
+                <input [ngModel]="model.latitude"
+                    placeholder="latitude"
+                    id="latitude"
+                    name="latitude"
+                    required
+                    readonly
+                    />
+                <label for="latitude" class="active">Latitude</label>
+            </div>
+            <div class="input-field col s6">
+                <input [ngModel]="model.longitude"
+                    placeholder="longitude"
+                    id="longitude"
+                    name="longitude"
+                    required
+                    readonly
+                    />
+                <label for="longitude" class="active">Longitude</label>
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" [disabled]="!poiForm.form.valid">Add</button>
+    </form>
+</div>

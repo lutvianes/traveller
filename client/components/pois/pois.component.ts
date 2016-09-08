@@ -15,7 +15,7 @@ export class PoisComponent implements OnInit, OnDestroy {
     selectedPoi: Poi;
 
     @Output()
-    onSelected = new EventEmitter<Poi>();
+    onSelect = new EventEmitter<Poi>();
 
     private subscriptions: Subscription[] = [];
 
@@ -25,32 +25,36 @@ export class PoisComponent implements OnInit, OnDestroy {
     ) {
         this.subscriptions.push(
             this.poiUiService.poiAdded$.subscribe(
-                poi => this.pois.push(poi)
+                poi => this.pois = [...this.pois, poi]
             ));
 
         this.subscriptions.push(
             this.poiUiService.poiDeleted$.subscribe(
-                poi => this.pois = this.pois.filter(
-                    p => p !== poi
-                )
+                poi => this.pois = this.pois.filter(p => p !== poi)
             ));
     }
 
     ngOnInit() {
-        this.poiService.getAll().then(pois => this.pois = pois);
+        this.poiService.getAll().then(pois => {
+            this.pois = pois;
+            this.poiUiService.init(pois);
+        });
     }
 
     ngOnDestroy() {
         this.subscriptions.forEach(s => s.unsubscribe());
     }
 
-    select(poi: Poi): void {
+    select(poi: Poi) {
         this.selectedPoi = poi;
-        this.onSelected.emit(poi);
+        this.onSelect.emit(poi);
     }
 
-    delete(poi: Poi): void {
+    delete(poi: Poi) {
         this.poiService.delete(poi.id)
-            .then(() => this.poiUiService.delete(poi));
+            .then(res => {
+                console.log(res);
+                this.poiUiService.delete(poi);
+            });
     }
 }

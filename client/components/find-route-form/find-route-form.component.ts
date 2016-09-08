@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
+import {Component, OnDestroy, Output, EventEmitter} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {DirectionsService, PoiUiService, PoiService} from '../../services';
@@ -9,7 +9,7 @@ import {Poi} from '../../models';
     templateUrl: './find-route-form.component.html'
 })
 
-export class FindRouteFormComponent implements OnInit, OnDestroy {
+export class FindRouteFormComponent implements OnDestroy {
 
     pois: Poi[];
     origin: Poi;
@@ -26,10 +26,21 @@ export class FindRouteFormComponent implements OnInit, OnDestroy {
         private directionsService: DirectionsService
     ) {
         this.subscriptions.push(
+            this.poiUiService.poisInit$.subscribe(
+                pois => {
+                    this.pois = pois;
+                    this.origin = this.pois[0];
+                    this.destination = this.pois[1];
+                }
+            )
+        );
+
+        this.subscriptions.push(
             this.poiUiService.poiAdded$.subscribe(
                 poi => this.pois.push(poi)
             )
         );
+
         this.subscriptions.push(
             this.poiUiService.poiDeleted$.subscribe(
                 poi => this.pois = this.pois.filter(
@@ -39,29 +50,24 @@ export class FindRouteFormComponent implements OnInit, OnDestroy {
         );
     }
 
-    ngOnInit() {
-        // TODO: Need to be removed
-        this.poiService.getAll()
-            .then(pois => this.pois = pois);
-    }
-
     ngOnDestroy() {
         this.subscriptions.forEach(s => s.unsubscribe());
     }
 
     findRoutes() {
         this.directionsService.route({
-                origin: {
-                    lat: this.origin.latitude,
-                    lng: this.origin.longitude
-                },
-                destination: {
-                    lat: this.destination.latitude,
-                    lng: this.destination.longitude
-                },
-                travelMode: 'DRIVING'
-            })
-            .then(result => this.onSubmit.emit(result));
+            origin: {
+                lat: this.origin.latitude,
+                lng: this.origin.longitude
+            },
+            destination: {
+                lat: this.destination.latitude,
+                lng: this.destination.longitude
+            },
+            travelMode: 'DRIVING'
+        })
+        .then(result => this.onSubmit.emit(result))
+        .catch(err => alert(err));
     }
 
     onChangeOrigin(poi: Poi) {

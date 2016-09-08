@@ -6,11 +6,27 @@ import {Poi} from '../models';
 @Injectable()
 export class PoiUiService {
 
-	private poiAddedSource = new Subject<Poi>();
-	private poiDeletedSource = new Subject<Poi>();
+	private poisInitSource;
+	private poiAddedSource;
+	private poiDeletedSource;
 
-	poiAdded$ = this.poiAddedSource.asObservable();
-	poiDeleted$ = this.poiDeletedSource.asObservable();
+	poisInit$;
+	poiAdded$;
+	poiDeleted$;
+
+	constructor() {
+		this.poisInitSource = new Subject<Poi[]>();
+		this.poiAddedSource = new Subject<Poi>();
+		this.poiDeletedSource = new Subject<Poi>();
+
+		this.poisInit$ = this.poisInitSource.asObservable();
+		this.poiAdded$ = this.poiAddedSource.asObservable();
+		this.poiDeleted$ = this.poiDeletedSource.asObservable();
+	}
+
+	init(pois: Poi[]) {
+		this.poisInitSource.next(pois);
+	}
 
 	add(poi: Poi) {
 		this.poiAddedSource.next(poi);

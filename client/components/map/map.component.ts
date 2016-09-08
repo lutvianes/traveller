@@ -17,12 +17,21 @@ export class MapComponent {
     constructor(private wrapper: GoogleMapsAPIWrapper) {
         this.wrapper.getNativeMap().then(map => {
             this.map = map;
-            this.directionsDisplay = new google.maps.DirectionsRenderer();
-            this.directionsDisplay.setMap(this.map);
         });
     }
 
     displayDirections(result) {
+        if (!this.directionsDisplay) {
+            this.directionsDisplay = new google.maps.DirectionsRenderer();
+            this.directionsDisplay.setMap(this.map);
+        }
         this.directionsDisplay.setDirections(result);
+    }
+
+    clearDirections() {
+        if (this.directionsDisplay != null) {
+            this.directionsDisplay.setMap(null);
+            this.directionsDisplay = null;
+        }
     }
 }

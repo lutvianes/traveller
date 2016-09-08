@@ -1,24 +1,43 @@
-<h2>Add Point of Interest</h2>
-<poi-form #poiForm></poi-form>
+<div class="row">
 
-<h2>Point of Interests</h2>
-<pois #poisComponent></pois>
+    <div class="col s12 l9">
+        <div class="map-container">
+            <sebm-google-map
+                [latitude]="center.lat"
+                [longitude]="center.lng"
+                [streetViewControl]="false"
+                (mapClick)="
+                    poiForm.setPosition($event.coords.lat, $event.coords.lng);
+                    newMarkerAdding($event.coords.lat, $event.coords.lng);
+                ">
+                <map></map>
+                <sebm-google-map-marker
+                    [latitude]="newMarker.lat"
+                    [longitude]="newMarker.lng"
+                    [visible]="newMarker.visible">
+                </sebm-google-map-marker>
+                <sebm-google-map-marker *ngFor="let m of markers"
+                    [latitude]="m.lat"
+                    [longitude]="m.lng"
+                    [title]="m.title"
+                    [draggable]="m.draggable"
+                    [visible]="m.visible">
+                </sebm-google-map-marker>
+            </sebm-google-map>
+        </div>
+    </div>
 
-<h2>Find routes</h2>
-<find-route-form (onSubmit)="displayResult($event)"></find-route-form>
-<div class="map-container">
-    <div class="center-marker"></div>
-    <sebm-google-map
-        [latitude]="center.lat"
-        [longitude]="center.lng"
-        [streetViewControl]="false"
-        (centerChange)="poiForm.setPosition($event.lat, $event.lng)">
-        <map #map></map>
-        <sebm-google-map-marker *ngFor="let m of markers"
-            [latitude]="m.lat"
-            [longitude]="m.lng"
-            [draggable]="m.draggable"
-            [visible]="m.visible">
-        </sebm-google-map-marker>
-    </sebm-google-map>
+    <div class="col s12 l3">
+        <h5>Add Point of Interest</h5>
+        <poi-form #poiForm></poi-form>
+
+        <h5>Point of Interests</h5>
+        <pois #poisComponent
+            (onSelect)="onSelectPoi($event)">
+        </pois>
+
+        <h5>Find routes</h5>
+        <find-route-form (onSubmit)="clearAll(); displayResult($event);"></find-route-form>
+    </div>
+
 </div>
