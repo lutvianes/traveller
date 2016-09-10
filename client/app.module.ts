@@ -11,7 +11,7 @@ import {GoogleMapsAPIWrapper} from 'angular2-google-maps/core/services/google-ma
 import {AppComponent, PoiFormComponent, PoisComponent, MapEditorComponent, MapComponent, FindRouteFormComponent} from './components';
 import {PoiService, DirectionsService} from './services';
 
-var secret = require('../config/secrets');
+var apiKey = require('../config/google-api');
 
 @NgModule({
     imports:        [
@@ -19,7 +19,7 @@ var secret = require('../config/secrets');
         FormsModule,
         HttpModule,
         AgmCoreModule.forRoot({
-            apiKey: secret.google.api.key
+            apiKey: apiKey
         })
         // routing
     ],
