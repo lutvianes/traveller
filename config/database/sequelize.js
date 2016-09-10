@@ -1,4 +1,3 @@
-const secret = require('../secrets').db;
 
 module.exports = {
     "development": {
