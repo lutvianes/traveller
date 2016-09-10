@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "NODE_ENV=development TRAVELLER_DB_USERNAME=root TRAVELLER_DB_PASSWORD=admin TRAVELLER_DB_DATABASE=traveller TRAVELLER_DB_HOST=127.0.0.1 node ./bin/www & webpack-dev-server --progress --color",
+    "start": "TRAVELLER_DB_HOST=$MYSQL_PORT_3306_TCP_ADDR TRAVELLER_DB_DATABASE=$MYSQL_ENV_MYSQL_DATABASE TRAVELLER_DB_USERNAME=root TRAVELLER_DB_PASSWORD=$MYSQL_ENV_MYSQL_ROOT_PASSWORD node ./bin/www",
+    "dev": "node ./bin/www & webpack-dev-server --progress --color",
     "build": "webpack -p --progress --color --config ./config/webpack.prod.js",
     "test": "NODE_ENV=test NODE_PATH=. mocha --recursive",
     "debug": "DEBUG=traveller:* node ./bin/www",
