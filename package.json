@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production node ./bin/www $PORT",
+    "start": "node ./bin/www",
     "dev": "NODE_ENV=development node ./bin/www & webpack-dev-server --progress --color",
     "build": "webpack -p --progress --color --config ./config/webpack.prod.js",
     "test": "NODE_ENV=test NODE_PATH=. mocha --recursive",
