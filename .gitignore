@@ -10,4 +10,4 @@ typings
 
 config/secrets/**/*
 client/build/
-public/dist/
+public/dist/google-api.js
