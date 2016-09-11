@@ -4,7 +4,7 @@ module.exports = {
         "username": process.env.TRAVELLER_DB_USERNAME,
         "password": process.env.TRAVELLER_DB_PASSWORD,
         "database": process.env.TRAVELLER_DB_DATABASE,
-        "host": process.env.MYSQL_PORT_3306_TCP_ADDR,
+        "host": process.env.TRAVELLER_DB_HOST,
         "socketPath": '/var/run/mysqld/mysqld.sock',
         "dialect": "mysql",
         seederStorage: "sequelize"
