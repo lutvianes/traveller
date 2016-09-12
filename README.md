@@ -1,6 +1,6 @@
 # Traveller Guide
 
-This is a route finding app developed using ExpressJS, AngularJS, and MySQL. The website can be accessed in [traveller.vians.cf](http://traveller.vians.cf).
+This is a route finding app developed using [ExpressJS](https://expressjs.com/), [AngularJS](https://angular.io/), and [MySQL](https://www.mysql.com/). The website can be accessed in [Traveller Preview](http://traveller.vians.cf).
 
 ### Requirements
 This application require MySQL to be installed. With following configuration:
