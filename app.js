@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'client', 'views'));
+app.set('views', path.join(__dirname, 'server', 'views'));
 app.set('view engine', 'pug');
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
