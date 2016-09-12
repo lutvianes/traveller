@@ -1,0 +1,16 @@
+client/
+config/env/
+webpack.*
+*/webpack.*
+node_modules/
+test/
+typings/
+
+.git/
+.gitignore
+.sequelizerc
+Dockerfile
+*.md
+package.json
+tsconfig.json
+typings.json

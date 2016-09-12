@@ -2,18 +2,11 @@ FROM mhart/alpine-node
 
 WORKDIR /src
 
-ADD bin/ bin/
+ADD . .
 
-ADD config/ config/
+RUN mkdir /src/node_modules
+VOLUME /src/node_modules
 
-ADD node_modules/ node_modules/
+RUN chmod +x run.sh
 
-ADD public/ public/
-
-ADD routes/ routes/
-
-ADD server/ server/
-
-ADD app.js app.js
-
-CMD node ./bin/www
+CMD ./run.sh

@@ -7,9 +7,7 @@
 var env = require('node-env-file');
 var path = require('path');
 
-if (process.env.NODE_ENV === 'production')
-    env(path.join(__dirname, '../config/env', 'production.env'));
-else if (process.env.NODE_ENV === 'development')
+if (process.env.NODE_ENV === 'development')
     env(path.join(__dirname, '../config/env', 'development.env'));
 else if (process.env.NODE_ENV === 'test')
     env(path.join(__dirname, '../config/env', 'test.env'));
