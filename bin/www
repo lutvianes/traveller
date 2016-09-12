@@ -1,6 +1,20 @@
 #!/usr/bin/env node
 
 /**
+* Load environment variables
+*/
+
+var env = require('node-env-file');
+var path = require('path');
+
+if (process.env.NODE_ENV === 'production')
+    env(path.join(__dirname, '../config/env', 'production.env'));
+else if (process.env.NODE_ENV === 'development')
+    env(path.join(__dirname, '../config/env', 'development.env'));
+else if (process.env.NODE_ENV === 'test')
+    env(path.join(__dirname, '../config/env', 'test.env'));
+
+/**
 * Module dependencies.
 */
 
@@ -8,13 +22,6 @@ var app = require('../app');
 var debug = require('debug')('traveller:server');
 var http = require('http');
 var models = require('../server/models');
-
-if (process.env.NODE_ENV === 'development')
-    require('dotenv').config({path: '../development.env'});
-else if (process.env.NODE_ENV === 'production')
-    require('dotenv').config({path: '../production.env'});
-else if (process.env.NODE_ENV === 'test')
-    require('dotenv').config({path: '../test.env'});
 
 /**
 * Get port from environment and store in Express.
