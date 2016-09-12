@@ -10,4 +10,5 @@ typings
 
 config/secrets/**/*
 client/build/
-public/dist/google-api.js
+public/dist/
+config/environment/*.env

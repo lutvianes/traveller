@@ -11,7 +11,7 @@ import {GoogleMapsAPIWrapper} from 'angular2-google-maps/core/services/google-ma
 import {AppComponent, PoiFormComponent, PoisComponent, MapEditorComponent, MapComponent, FindRouteFormComponent} from './components';
 import {PoiService, DirectionsService} from './services';
 
-var apiKey = require('../config/google-api');
+var apiKey = require('../config/secrets/google-api');
 
 @NgModule({
     imports:        [

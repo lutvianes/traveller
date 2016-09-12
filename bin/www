@@ -9,6 +9,13 @@ var debug = require('debug')('traveller:server');
 var http = require('http');
 var models = require('../server/models');
 
+if (process.env.NODE_ENV === 'development')
+    require('dotenv').config({path: '../development.env'});
+else if (process.env.NODE_ENV === 'production')
+    require('dotenv').config({path: '../production.env'});
+else if (process.env.NODE_ENV === 'test')
+    require('dotenv').config({path: '../test.env'});
+
 /**
 * Get port from environment and store in Express.
 */
